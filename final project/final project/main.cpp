@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h>
-
+#include <fstream>
+#include <string>
 
 
 
@@ -16,7 +17,17 @@ int main()
 	std::string line;
 
 
-	std::cout << "Title art logo goes here\n";
+	std::ifstream draw("Snake.txt");
+	if (draw.is_open())
+	{
+		while (getline(draw, line))
+		{
+			std::cout << line << "\n";
+		}
+		draw.close();
+	}
+
+	else std::cout << "unable to open file" << std::endl;
 	std::cout << "\n";
 	std::cout << "\n";
 	std::cout << "\n";
