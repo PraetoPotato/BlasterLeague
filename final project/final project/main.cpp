@@ -4,6 +4,7 @@
 #include <string>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
+#include<conio.h>
 
 bool gameOver;
 int score = 0;
@@ -61,8 +62,12 @@ int main()
 		std::cout << "*******************************************************************************************\n";
 		std::cout << "Score    " << score << "\n";
 		std::cout << "*******************************************************************************************\n";
-		draww(x, y);
+		draw();
 		system("CLS");
+		
+
+		
+
 		
 	}
 	
@@ -108,6 +113,11 @@ int main()
 void draww(int charX, int charB)
 {
 
+	
+
+
+
+
 	for (int row = 0;row < 29;row++)
 	{
 
@@ -120,10 +130,52 @@ void draww(int charX, int charB)
 			map[48][row] = 'X';
 			map[charX][charB] = 'O';
 
+
+		
+
 			std::cout << map[col][row];
+
+
+
+			movement();
+			
 
 		}
 		std::cout << std::endl;
+		
+	}
+
+	
+
+}
+
+
+void movement()
+{
+	char move = 0;
+	move = _getch();
+	switch (move)
+	{
+	case 'w':
+		system("CLS");
+		if (y - 1 - 1 >= 0)
+		{
+			y--;
+			draww(x, y);
+			system("CLS");
+			break;
+		}
+
+	case 's':
+		system("CLS");
+
+
+	case 'a':
+		system("CLS");
+
+	case 'd':
+		system("CLS");
+
 
 	}
 }
