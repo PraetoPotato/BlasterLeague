@@ -4,7 +4,7 @@
 #include <string>
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>       /* time */
-#include<conio.h>
+#include<conio.h>//needed for _getch and kbhit
 
 bool gameOver;
 int score = 0;
@@ -14,6 +14,8 @@ char map[30][50];
 void draww(int,int);
 void movement();
 void events();
+
+int direction=5;
 
 
 
@@ -59,16 +61,15 @@ int main()
 	
 	while (gameOver==false)
 	{
-		std::cout << "*******************************************************************************************\n";
-		std::cout << "Score    " << score << "\n";
-		std::cout << "*******************************************************************************************\n";
-		draw();
-		system("CLS");
+		draww(x,y);
+		//the events that will be taking place will keep looping until the key board gets hit
+		if (_kbhit())
+		{
+			movement();
+		}
+		events();
 		
 
-		
-
-		
 	}
 	
 
@@ -105,18 +106,17 @@ int main()
 
 
 
-
+	system("CLS");
 	system("pause");
 	return 0;
 }
 
-void draww(int charX, int charB)
+void draww(int charX, int charY)
 {
-
-	
-
-
-
+	system("CLS");
+	std::cout << "*******************************************************************************************\n";
+	std::cout << "Score    " << score << "\n";
+	std::cout << "*******************************************************************************************\n";
 
 	for (int row = 0;row < 29;row++)
 	{
@@ -128,17 +128,13 @@ void draww(int charX, int charB)
 			map[col][28] = 'X';
 			map[0][row] = 'X';
 			map[48][row] = 'X';
-			map[charX][charB] = 'O';
+			map[charX][charY] = 'O';
 
 
 		
 
 			std::cout << map[col][row];
 
-
-
-			movement();
-			
 
 		}
 		std::cout << std::endl;
@@ -152,30 +148,54 @@ void draww(int charX, int charB)
 
 void movement()
 {
-	char move = 0;
+	char move;
 	move = _getch();
 	switch (move)
 	{
 	case 'w':
-		system("CLS");
-		if (y - 1 - 1 >= 0)
-		{
-			y--;
-			draww(x, y);
-			system("CLS");
-			break;
-		}
-
+		direction = 1;
+		break;
 	case 's':
-		system("CLS");
-
+		direction = 2;
+	
+		break;
 
 	case 'a':
-		system("CLS");
+		direction = 3;
 
+		break;
 	case 'd':
-		system("CLS");
-
-
+		direction = 4;
+	/*	system("CLS");
+		x++;
+		draww(x, y);*/
+		break;
 	}
+	
+}
+
+void events()
+{
+	switch (direction)
+	{
+	case 1:
+		y--;
+		break;
+	case 2:
+		y++;
+		break;
+	case 3:
+		x--;
+		break;
+	case 4:
+		x++;
+		break;
+	default:
+		break;
+	}
+	if (x > 48 || x < 0|| y> 28 || y < 0)
+	{
+		gameOver = true;
+	}
+
 }
