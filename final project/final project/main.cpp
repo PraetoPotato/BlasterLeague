@@ -42,21 +42,12 @@ int main()
 		y = 5;
 		direction = 5;
 
-		std::ifstream draw("Snake.txt");
-		if (draw.is_open())
-		{
-			while (getline(draw, line))
-			{
-				std::cout << line << "\n";
-			}
-			draw.close();
-		}
-
-		else std::cout << "unable to open file" << std::endl;
-		std::cout << "\n";
-		std::cout << "\n";
-		std::cout << "\n";
-		std::cout << "\n";
+		std::cout << " ______   _    _     ___     _    __  ______" << std::endl;
+		std::cout << "|  ____| | \\  | |   / _ \\   | |  / / |  ____|" << std::endl;
+		std::cout << "| |____  |  \\ | |  / / \\ \\  | |_/ /  | |___" << std::endl;
+		std::cout << "|____  | |   \\| | | /___\\ | |  __  | |  ___|" << std::endl;
+		std::cout << " ____| | | |\\   | |  ___  | | |  | | | |____" << std::endl;
+		std::cout << "|______| |_| \\__| |_|   |_| |_|  |_| |______|" << std::endl;
 		std::cout << "\n";
 		std::cout << "\n";
 		std::cout << "\n";
@@ -97,18 +88,22 @@ int main()
 		}
 		else
 		{
-			draw.open("SNAKE GAME OVER.txt", std::ios::in);
-			if (draw.is_open())
-			{
-				while (getline(draw, line))
-				{
-					std::cout << line << "\n";
-				}
-				draw.close();
-			}
+			std::cout << " ______     ___     __    __   ______ " << std::endl;
+			std::cout << "|  ____|   / _ \\   |  \\  /  | |  ____| " << std::endl;
+			std::cout << "| | ___   / / \\ \\  |   \\/   | | |___  " << std::endl;
+			std::cout << "| ||_  | | /___\\ | | |\\  /| | |  ___|" << std::endl;
+			std::cout << "| |__| | |  ___  | | | \\/ | | | |____ " << std::endl;
+			std::cout << "|______| |_|   |_| |_|    |_| |______|" << std::endl;
 
-			else std::cout << "unable to open file" << std::endl;
-			system("pause");
+			std::cout << " " << std::endl;
+
+			std::cout << " ______   _     __  ______   ______ " << std::endl;
+			std::cout << "|  __  | | |   / / |  ____| |  __  | " << std::endl;
+			std::cout << "| |  | | | |  / /  | |___   | |__| | " << std::endl;
+			std::cout << "| |  | | | | / /   |  ___|  |  _  _| " << std::endl;
+			std::cout << "| |__| | | |/ /    | |____  | | \\ \\ " << std::endl;
+			std::cout << "|______| |___/     |______| |_|  \\_\\ " << std::endl;
+ 			system("pause");
 		}
 		
 		
