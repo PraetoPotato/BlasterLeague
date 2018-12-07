@@ -7,6 +7,7 @@
 #include<conio.h>//needed for _getch and kbhit
 
 bool gameOver;
+bool restart;
 int score = 0;
 int x(5), y(5),foodX, foodY;
 char map[30][50];
@@ -35,6 +36,7 @@ int main()
 	{
 		system("CLS");
 		gameOver = false;
+		restart = false;
 
 		x = 5;
 		y = 5;
@@ -65,7 +67,7 @@ int main()
 		std::cout << "\n";
 		std::cout << "\n";
 		std::cout << "\n";
-		std::cout << "Controls: W - up    S - down    A - left   D - right\n";
+		std::cout << "Controls: W - up    S - down    A - left   D - right   P- pause   R-reset game\n";
 
 		system("pause");
 		system("CLS");
@@ -89,19 +91,27 @@ int main()
 
 		}
 		system("CLS");
-
-		draw.open("SNAKE GAME OVER.txt", std::ios::in);
-		if (draw.is_open())
+		if (restart == true)
 		{
-			while (getline(draw, line))
-			{
-				std::cout << line << "\n";
-			}
-			draw.close();
+		
 		}
+		else
+		{
+			draw.open("SNAKE GAME OVER.txt", std::ios::in);
+			if (draw.is_open())
+			{
+				while (getline(draw, line))
+				{
+					std::cout << line << "\n";
+				}
+				draw.close();
+			}
 
-		else std::cout << "unable to open file" << std::endl;
-		system("pause");
+			else std::cout << "unable to open file" << std::endl;
+			system("pause");
+		}
+		
+		
 	}
 	
 	return 0;
@@ -130,20 +140,13 @@ void draww(int charX, int charY,int fruitX,int fruitY)
 				map[fruitX][fruitY] = 'F';
 			}
 			
-			
-
-
-		
 
 			std::cout << map[col][row];
-
 
 		}
 		std::cout << std::endl;
 		
 	}
-
-	
 
 }
 
@@ -169,9 +172,17 @@ void movement()
 	case'D':
 	case 'd':
 		direction = 4;
-	/*	system("CLS");
-		x++;
-		draww(x, y);*/
+
+		break;
+	case 'p':
+	case'P':
+		system("pause");
+		break;
+
+	case 'r':
+	case'R':
+		gameOver = true;
+		restart = true;
 		break;
 	}
 	
