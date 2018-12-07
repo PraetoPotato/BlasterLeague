@@ -30,69 +30,80 @@ int main()
 	MoveWindow(console, r.left, r.top, 800, 600, TRUE);
 	std::string line;
 
-
-	std::ifstream draw("Snake.txt");
-	if (draw.is_open())
+	//This is done to make the game loop after you die
+	for (;;)
 	{
-		while (getline(draw, line))
+		system("CLS");
+		gameOver = false;
+
+		x = 5;
+		y = 5;
+		direction = 5;
+
+		std::ifstream draw("Snake.txt");
+		if (draw.is_open())
 		{
-			std::cout << line << "\n";
+			while (getline(draw, line))
+			{
+				std::cout << line << "\n";
+			}
+			draw.close();
 		}
-		draw.close();
+
+		else std::cout << "unable to open file" << std::endl;
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+
+		std::cout << "Instructions: You control a snake that starts out as a dot and you\n have to eat fruit to grow bigger.  Try not to collide with the edges\n of the play area or even yourself if you become to large.\n";
+
+
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "\n";
+		std::cout << "Controls: W - up    S - down    A - left   D - right\n";
+
+		system("pause");
+		system("CLS");
+
+		srand(time(NULL));
+		foodX = getFoodCoordX(rand() % 47 + 1);
+		foodY = getFoodCoordY(rand() % 27 + 1);
+
+		//The Game loop
+		while (gameOver == false)
+		{
+
+			draww(x, y, foodX, foodY);
+			//the events that will be taking place will keep looping until the key board gets hit
+			if (_kbhit())
+			{
+				movement();
+			}
+			events();
+			
+
+		}
+		system("CLS");
+
+		draw.open("SNAKE GAME OVER.txt", std::ios::in);
+		if (draw.is_open())
+		{
+			while (getline(draw, line))
+			{
+				std::cout << line << "\n";
+			}
+			draw.close();
+		}
+
+		else std::cout << "unable to open file" << std::endl;
+		system("pause");
 	}
-
-	else std::cout << "unable to open file" << std::endl;
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-
-	std::cout << "Instructions: You control a snake that starts out as a dot and you\n have to eat fruit to grow bigger.  Try not to collide with the edges\n of the play area or even yourself if you become to large.\n";
-
-
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "\n";
-	std::cout << "Controls: W - up    S - down    A - left   D - right\n";
-
-	system("pause");
-	system("CLS");
 	
-	srand(time(NULL));
-	foodX = getFoodCoordX(rand() % 47+1);
-	foodY = getFoodCoordY(rand() % 27+1);
-
-	//The Game loop
-	while (gameOver==false)
-	{
-		
-		draww(x,y,foodX,foodY);
-		//the events that will be taking place will keep looping until the key board gets hit
-		if (_kbhit())
-		{
-			movement();
-		}
-		events();
-		
-
-	}
-	system("CLS");
-
-	draw.open("SNAKE GAME OVER.txt", std::ios::in);
-	if (draw.is_open())
-	{
-		while (getline(draw, line))
-		{
-			std::cout << line << "\n";
-		}
-		draw.close();
-	}
-
-	else std::cout << "unable to open file" << std::endl;
-	system("pause");
 	return 0;
 }
 
@@ -185,7 +196,7 @@ void events()
 	default:
 		break;
 	}
-	if (x > 49 || x < 0|| y> 29 || y < 0)
+	if (x > 47 || x < 1|| y> 27 || y < 1)
 	{
 		gameOver = true;
 	}
